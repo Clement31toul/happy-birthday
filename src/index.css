@@ -115,6 +115,132 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background-color: transparent !important;
+  }
+}
+
+/* Custom animation utilities */
+@layer utilities {
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-2px) rotate(-0.5deg); }
+    40% { transform: translateX(2px) rotate(0.5deg); }
+    60% { transform: translateX(-1px) rotate(-0.25deg); }
+    80% { transform: translateX(1px) rotate(0.25deg); }
+  }
+  .animate-shake { animation: shake 0.4s ease-in-out both; }
+
+  @keyframes speed-lines {
+    0% { opacity: 0; transform: translateX(0); }
+    10% { opacity: 0.7; }
+    100% { opacity: 0; transform: translateX(180%); }
+  }
+  .speed-line { width: 40px; height: 2px; background: hsl(var(--foreground)/0.5); border-radius: 9999px; animation: speed-lines 0.5s ease-out forwards; }
+
+  @keyframes spark {
+    0% { transform: translate(0,0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--sx, 12px), var(--sy, -10px)) scale(0.2); opacity: 0; }
+  }
+  .spark { width: 6px; height: 6px; background: hsl(var(--accent)); border-radius: 9999px; animation: spark 0.6s ease-out forwards; box-shadow: 0 0 8px hsl(var(--accent)/0.8); }
+
+  @keyframes foil-shimmer {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+  .foil {
+    background: linear-gradient(110deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 20%, rgba(255,255,255,0.2) 40%, rgba(255,255,255,0.05) 60%, rgba(255,255,255,0.15) 80%);
+    background-size: 200% 100%;
+    animation: foil-shimmer 2.4s linear infinite;
+    mix-blend-mode: screen;
+  }
+
+  @keyframes page-flip-up {
+    0% { transform-origin: bottom; transform: rotateX(0deg); opacity: 1; }
+    60% { transform-origin: bottom; transform: rotateX(-140deg); opacity: 0.9; }
+    100% { transform-origin: bottom; transform: rotateX(-180deg); opacity: 0; }
+  }
+  .animate-page-flip-up { animation: page-flip-up 0.8s cubic-bezier(0.2,0.6,0.2,1) forwards; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+  .animate-float { animation: float 3s ease-in-out infinite; }
+
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  .shimmer {
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { filter: drop-shadow(0 0 4px currentColor); }
+    50% { filter: drop-shadow(0 0 12px currentColor); }
+  }
+  .animate-glow { animation: glow-pulse 2s ease-in-out infinite; }
+
+  /* Slide out/in animations for vehicles */
+  @keyframes slide-out-right {
+    0% { transform: translateX(0); opacity: 1; }
+    100% { transform: translateX(180%); opacity: 0.3; }
+  }
+  .animate-slide-out-right { animation: slide-out-right 0.6s ease-in forwards; }
+
+  @keyframes slide-in-right {
+    0% { transform: translateX(40%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  .animate-slide-in-right { animation: slide-in-right 0.6s ease-out both; }
+ 
+  /* Cinematic journey animations */
+  @keyframes scroll-x-12 { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes scroll-x-24 { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes scroll-x-30 { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .animate-scroll-x-12 { animation: scroll-x-12 12s linear infinite; }
+  .animate-scroll-x-24 { animation: scroll-x-24 24s linear infinite; }
+  .animate-scroll-x-30 { animation: scroll-x-30 30s linear infinite; }
+
+  @keyframes road-move { from { background-position: 0 0; } to { background-position: -80px 0; } }
+  .animate-road-move { animation: road-move 0.6s linear infinite; }
+
+  @keyframes bus-bob {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  .animate-bus-bob { animation: bus-bob 2.4s ease-in-out infinite; }
+
+  /* Fountain jets */
+  @keyframes fountain-jet {
+    0% { transform: translateY(0) scaleY(0.8); opacity: 0.0; }
+    20% { opacity: 0.9; }
+    50% { transform: translateY(-6px) scaleY(1); opacity: 1; }
+    100% { transform: translateY(0) scaleY(0.85); opacity: 0.0; }
+  }
+  .animate-fountain-jet { animation: fountain-jet 0.9s ease-in-out infinite; }
+
+  /* Wiggle (small rotation oscillation) */
+  @keyframes wiggle {
+    0%, 100% { transform: translate(-50%, -33%) rotate(0deg); }
+    25% { transform: translate(-50%, -33%) rotate(-6deg); }
+    75% { transform: translate(-50%, -33%) rotate(6deg); }
+  }
+  .animate-wiggle { animation: wiggle 1.4s ease-in-out infinite; }
+
+  /* Bike movement across screen */
+  @keyframes bike-move {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(140vw); }
+  }
+
+  /* Highway overhead sign flyover */
+  @keyframes sign-fly {
+    0% { transform: translateY(120vh); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
   }
 }

@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
 import ScratchCard from "@/components/ScratchCard";
 import CalendarReveal from "@/components/CalendarReveal";
 import TransportChoice from "@/components/TransportChoice";
 import HangmanGame from "@/components/HangmanGame";
+import BusHangman from "@/components/BusHangman";
 import BusJourney from "@/components/BusJourney";
 import TicketCheck from "@/components/TicketCheck";
-import AprilFoolsReveal from "@/components/AprilFoolsReveal";
-import RealTripReveal from "@/components/RealTripReveal";
-import BikeJourney from "@/components/BikeJourney";
-import IntersectionChoice from "@/components/IntersectionChoice";
-import DisneyToTrain from "@/components/DisneyToTrain";
-import TrainScene from "@/components/TrainScene";
+// Removed RealTripReveal, BikeJourney, VanGoghScene from the simplified flow
 import FinalReveal from "@/components/FinalReveal";
+import CalendarRewind from "@/components/CalendarRewind";
+// Removed HighwayPOV from the simplified flow
+import Scene from "@/components/core/Scene";
+import sfx from "@/game/sfx";
 
 type Stage = 
   | "scratch"
@@ -20,12 +21,8 @@ type Stage =
   | "hangman"
   | "bus-journey"
   | "ticket-check"
-  | "april-fools"
-  | "real-trip"
-  | "bike-journey"
-  | "intersection"
-  | "disney-to-train"
-  | "train-scene"
+  | "calendar-return"
+  | "calendar-rewind"
   | "final-reveal";
 
 const Index = () => {
@@ -38,68 +35,64 @@ const Index = () => {
 
   const handleFishClick = () => {
     setHasClickedFish(true);
-    setStage("april-fools");
+    setStage("calendar-rewind");
   };
 
+  useEffect(() => {
+    // Mute all SFX globally per user request
+    sfx.setMuted(true);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-primary/5">
-      {stage === "scratch" && (
-        <ScratchCard onComplete={() => handleNextStage("calendar")} />
-      )}
-      
-      {stage === "calendar" && (
-        <CalendarReveal 
-          onComplete={() => handleNextStage("transport")}
-          onFishClick={handleFishClick}
-        />
-      )}
-      
-      {stage === "transport" && (
-        <TransportChoice onBusSelected={() => handleNextStage("hangman")} />
-      )}
-      
-      {stage === "hangman" && (
-        <HangmanGame 
-          onComplete={() => handleNextStage("bus-journey")}
-          onFail={() => handleNextStage("bus-journey")}
-        />
-      )}
-      
-      {stage === "bus-journey" && (
-        <BusJourney onComplete={() => handleNextStage("ticket-check")} />
-      )}
-      
-      {stage === "ticket-check" && (
-        <TicketCheck onTicketsScanned={handleFishClick} />
-      )}
-      
-      {stage === "april-fools" && (
-        <AprilFoolsReveal onComplete={() => handleNextStage("real-trip")} />
-      )}
-      
-      {stage === "real-trip" && (
-        <RealTripReveal onBikeSelected={() => handleNextStage("bike-journey")} />
-      )}
-      
-      {stage === "bike-journey" && (
-        <BikeJourney onComplete={() => handleNextStage("intersection")} />
-      )}
-      
-      {stage === "intersection" && (
-        <IntersectionChoice onDisneySelected={() => handleNextStage("disney-to-train")} />
-      )}
-      
-      {stage === "disney-to-train" && (
-        <DisneyToTrain onComplete={() => handleNextStage("train-scene")} />
-      )}
-      
-      {stage === "train-scene" && (
-        <TrainScene onSeatsClicked={() => handleNextStage("final-reveal")} />
-      )}
-      
-      {stage === "final-reveal" && (
-        <FinalReveal />
-      )}
+    <div className="min-h-screen">
+      <AnimatePresence mode="wait">
+        {stage === "scratch" && (
+          <Scene key="scratch">
+            <ScratchCard onComplete={() => handleNextStage("calendar")} />
+          </Scene>
+        )}
+        {stage === "calendar" && (
+          <Scene key="calendar">
+            <CalendarReveal onComplete={() => handleNextStage("hangman")} onFishClick={handleFishClick} />
+          </Scene>
+        )}
+        {stage === "transport" && (
+          <Scene key="transport">
+            <TransportChoice onBusSelected={() => handleNextStage("hangman")} />
+          </Scene>
+        )}
+        {stage === "hangman" && (
+          <Scene key="hangman">
+            <BusHangman onComplete={() => handleNextStage("bus-journey")} onFail={() => handleNextStage("bus-journey")} />
+          </Scene>
+        )}
+        {stage === "bus-journey" && (
+          <Scene key="bus-journey">
+            <BusJourney onComplete={() => handleNextStage("ticket-check")} />
+          </Scene>
+        )}
+        {stage === "ticket-check" && (
+          <Scene key="ticket-check">
+            <TicketCheck onTicketsScanned={() => handleNextStage("calendar-return")} />
+          </Scene>
+        )}
+        {stage === "calendar-return" && (
+          <Scene key="calendar-return">
+            <CalendarReveal onComplete={() => {}} onFishClick={handleFishClick} disableVehicles showFishArrow skipToApril />
+          </Scene>
+        )}
+        {stage === "calendar-rewind" && (
+          <Scene key="calendar-rewind">
+            <CalendarRewind onComplete={() => handleNextStage("final-reveal")} />
+          </Scene>
+        )}
+        
+        {stage === "final-reveal" && (
+          <Scene key="final-reveal">
+            <FinalReveal />
+          </Scene>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

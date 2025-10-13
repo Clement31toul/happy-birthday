@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Card } from "@/components/ui/card";
-import fishIcon from "@/assets/fish.png";
+import fishIcon from "@/assets/fish.svg";
 
 interface AprilFoolsRevealProps {
   onComplete: () => void;
@@ -20,11 +20,11 @@ const AprilFoolsReveal = ({ onComplete }: AprilFoolsRevealProps) => {
           alt="Poisson d'Avril"
           className="w-32 h-32 mx-auto animate-scale-in"
         />
-        <h1 className="text-6xl font-bold text-white animate-fade-in">
-          🐟 Poisson d'Avril ! 🎣
+        <h1 className="text-5xl font-bold text-white animate-fade-in">
+          C'était un poisson d'avril 🎣
         </h1>
-        <p className="text-2xl text-white/90">
-          Ce n'était qu'une blague...
+        <p className="text-xl text-white/90">
+          Merci d'avoir joué le jeu !
         </p>
       </Card>
     </div>

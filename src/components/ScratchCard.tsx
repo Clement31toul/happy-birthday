@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
+import calendarBg from "@/assets/calendar.svg";
 
 interface ScratchCardProps {
   onComplete: () => void;
@@ -7,8 +8,11 @@ interface ScratchCardProps {
 
 const ScratchCard = ({ onComplete }: ScratchCardProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isScratching, setIsScratching] = useState(false);
   const [scratchPercentage, setScratchPercentage] = useState(0);
+  const [flecks, setFlecks] = useState<Array<{ id: number; x: number; y: number; sx: number; sy: number }>>([]);
+  const fleckIdRef = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -52,6 +56,19 @@ const ScratchCard = ({ onComplete }: ScratchCardProps) => {
     ctx.fill();
 
     checkScratchPercentage();
+
+    // spawn fleck particle at container-relative position
+    const container = containerRef.current;
+    if (container) {
+      const crect = container.getBoundingClientRect();
+      const id = fleckIdRef.current++;
+      const relX = x - crect.left;
+      const relY = y - crect.top;
+      const sx = 8 + Math.random() * 14;
+      const sy = -12 - Math.random() * 10;
+      setFlecks((prev) => [...prev, { id, x: relX, y: relY, sx, sy }]);
+      setTimeout(() => setFlecks((prev) => prev.filter((f) => f.id !== id)), 700);
+    }
   };
 
   const checkScratchPercentage = () => {
@@ -78,10 +95,10 @@ const ScratchCard = ({ onComplete }: ScratchCardProps) => {
 
   const handleMouseDown = () => setIsScratching(true);
   const handleMouseUp = () => setIsScratching(false);
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleMouseMove = (e: any) => {
     if (isScratching) scratch(e.clientX, e.clientY);
   };
-  const handleTouchMove = (e: React.TouchEvent) => {
+  const handleTouchMove = (e: any) => {
     e.preventDefault();
     if (e.touches[0]) {
       scratch(e.touches[0].clientX, e.touches[0].clientY);
@@ -89,14 +106,13 @@ const ScratchCard = ({ onComplete }: ScratchCardProps) => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-4">
-      <Card className="relative w-full max-w-2xl aspect-[3/2] overflow-hidden shadow-strong">
-        <div className="absolute inset-0 flex items-center justify-center bg-gradient-festive p-8">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold text-white mb-4">🎁 Surprise !</h1>
-            <p className="text-xl text-white/90">Un cadeau vous attend...</p>
-          </div>
-        </div>
+    <div className="flex items-center justify-center min-h-screen p-2">
+      <Card ref={containerRef} className="relative w-full max-w-5xl aspect-[16/9] overflow-hidden shadow-strong">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${calendarBg})` }}
+        />
+        <div className="absolute inset-0 foil opacity-40 pointer-events-none" />
         <canvas
           ref={canvasRef}
           className="absolute inset-0 w-full h-full cursor-pointer touch-none"
@@ -108,6 +124,23 @@ const ScratchCard = ({ onComplete }: ScratchCardProps) => {
           onTouchEnd={handleMouseUp}
           onTouchMove={handleTouchMove}
         />
+        {/* fleck particles */}
+        <div className="pointer-events-none absolute inset-0">
+          {flecks.map((f) => (
+            <div
+              key={f.id}
+              className="spark absolute"
+              style={{
+                left: f.x,
+                top: f.y,
+                // @ts-ignore custom var for animation
+                "--sx": `${f.sx}px`,
+                // @ts-ignore
+                "--sy": `${f.sy}px`,
+              } as any}
+            />)
+          )}
+        </div>
       </Card>
     </div>
   );

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a5f3fc"/>
+      <stop offset="100%" stop-color="#e0f2fe"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky2)"/>
+  <rect y="450" width="800" height="150" fill="#fde68a"/>
+  <path d="M0,480 C200,460 600,540 800,520 L800,600 L0,600 Z" fill="#f59e0b" opacity="0.5"/>
+  <g>
+    <g fill="#ef4444">
+      <rect x="120" y="420" width="6" height="40" fill="#16a34a"/>
+      <path d="M123 410 C 115 420, 115 440, 123 430 C 131 440, 131 420, 123 410 Z"/>
+    </g>
+    <g fill="#ec4899">
+      <rect x="220" y="430" width="6" height="40" fill="#16a34a"/>
+      <path d="M223 420 C 215 430, 215 450, 223 440 C 231 450, 231 430, 223 420 Z"/>
+    </g>
+    <g fill="#f97316">
+      <rect x="520" y="430" width="6" height="40" fill="#16a34a"/>
+      <path d="M523 420 C 515 430, 515 450, 523 440 C 531 450, 531 430, 523 420 Z"/>
+    </g>
+    <g fill="#06b6d4">
+      <rect x="640" y="420" width="6" height="40" fill="#16a34a"/>
+      <path d="M643 410 C 635 420, 635 440, 643 430 C 651 440, 651 420, 643 410 Z"/>
+    </g>
+  </g>
+</svg>

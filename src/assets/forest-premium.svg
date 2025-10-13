@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#87ceeb"/>
+      <stop offset="50%" stop-color="#b0d9f0"/>
+      <stop offset="100%" stop-color="#e0f2ff"/>
+    </linearGradient>
+    <linearGradient id="water-grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4a90e2"/>
+      <stop offset="50%" stop-color="#5fa3e8"/>
+      <stop offset="100%" stop-color="#4a90e2"/>
+    </linearGradient>
+    <radialGradient id="sun-glow">
+      <stop offset="0%" stop-color="#fff9e6" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#fff9e6" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur-soft">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Sky with gradient -->
+  <rect width="1600" height="900" fill="url(#sky-grad)"/>
+
+  <!-- Sun glow -->
+  <circle cx="1200" cy="180" r="200" fill="url(#sun-glow)" opacity="0.6"/>
+  <circle cx="1200" cy="180" r="50" fill="#fffacd" filter="url(#glow)"/>
+
+  <!-- Distant mountains with depth -->
+  <g opacity="0.4" filter="url(#blur-soft)">
+    <path d="M0 480 Q400 380 800 420 Q1200 460 1600 400 L1600 900 L0 900 Z" fill="#a7d8de"/>
+  </g>
+
+  <!-- Mid-distance hills -->
+  <g opacity="0.6">
+    <path d="M0 520 Q300 460 600 500 Q900 540 1200 490 Q1400 520 1600 510 L1600 900 L0 900 Z" fill="#7ec8a3"/>
+  </g>
+
+  <!-- Tree line (far) -->
+  <g fill="#34a853" opacity="0.75">
+    <ellipse cx="120" cy="580" rx="70" ry="90"/>
+    <ellipse cx="240" cy="590" rx="80" ry="100"/>
+    <ellipse cx="380" cy="575" rx="75" ry="95"/>
+    <ellipse cx="540" cy="585" rx="85" ry="105"/>
+    <ellipse cx="720" cy="580" rx="70" ry="90"/>
+    <ellipse cx="900" cy="590" rx="90" ry="110"/>
+    <ellipse cx="1100" cy="575" rx="80" ry="100"/>
+    <ellipse cx="1300" cy="585" rx="75" ry="95"/>
+    <ellipse cx="1480" cy="580" rx="85" ry="105"/>
+  </g>
+
+  <!-- Water with reflections -->
+  <rect x="0" y="640" width="1600" height="140" fill="url(#water-grad)" opacity="0.85"/>
+  
+  <!-- Water highlights (animated ripples) -->
+  <g fill="#ffffff" opacity="0.3">
+    <ellipse cx="400" cy="690" rx="140" ry="12">
+      <animate attributeName="rx" values="140;160;140" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.3;0.5;0.3" dur="3s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="900" cy="710" rx="180" ry="16">
+      <animate attributeName="rx" values="180;200;180" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.3;0.5;0.3" dur="4s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="1300" cy="700" rx="150" ry="14">
+      <animate attributeName="rx" values="150;170;150" dur="3.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.3;0.5;0.3" dur="3.5s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+
+  <!-- Fountain spray -->
+  <g fill="#ffffff" opacity="0.7" filter="url(#glow)">
+    <path d="M800 640 q-10-50 0-100 q10 50 0 100 Z">
+      <animateTransform attributeName="transform" type="scale" values="1;1.1;1" dur="1.5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M840 640 q-8-40 0-80 q8 40 0 80 Z">
+      <animateTransform attributeName="transform" type="scale" values="1;1.15;1" dur="1.3s" repeatCount="indefinite"/>
+    </path>
+    <path d="M760 640 q-8-40 0-80 q8 40 0 80 Z">
+      <animateTransform attributeName="transform" type="scale" values="1;1.12;1" dur="1.4s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Foreground grass with texture -->
+  <g>
+    <path d="M0 740 C300 720 600 760 900 740 C1200 720 1400 780 1600 760 L1600 900 L0 900 Z" fill="#2d7a3e" opacity="0.9"/>
+    <path d="M0 780 C200 770 500 800 800 785 C1100 770 1300 810 1600 795 L1600 900 L0 900 Z" fill="#1e5a2e"/>
+  </g>
+
+  <!-- Grass blades (detail) -->
+  <g stroke="#1e5a2e" stroke-width="2" opacity="0.6">
+    <line x1="120" y1="780" x2="125" y2="760"/>
+    <line x1="280" y1="790" x2="285" y2="770"/>
+    <line x1="450" y1="785" x2="455" y2="765"/>
+    <line x1="680" y1="795" x2="685" y2="775"/>
+    <line x1="920" y1="788" x2="925" y2="768"/>
+    <line x1="1150" y1="792" x2="1155" y2="772"/>
+    <line x1="1380" y1="787" x2="1385" y2="767"/>
+  </g>
+
+  <!-- Mist/fog overlay -->
+  <rect width="1600" height="900" fill="#ffffff" opacity="0.05"/>
+</svg>

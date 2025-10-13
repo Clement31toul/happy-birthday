@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c7e9ff"/>
+      <stop offset="100%" stop-color="#eaf6ff"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#74c0fc"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- sky -->
+  <rect width="1600" height="900" fill="url(#sky)"/>
+
+  <!-- distant hills -->
+  <g fill="#a7f3d0" opacity="0.6">
+    <path d="M0 520 C 200 460, 360 460, 560 520 C 760 580, 920 560, 1120 520 C 1320 480, 1480 520, 1600 540 L 1600 900 L 0 900 Z"/>
+  </g>
+
+  <!-- mid trees -->
+  <g fill="#34d399" opacity="0.85">
+    <circle cx="140" cy="560" r="80"/>
+    <circle cx="220" cy="560" r="70"/>
+    <circle cx="320" cy="570" r="90"/>
+    <circle cx="460" cy="560" r="80"/>
+    <circle cx="760" cy="570" r="95"/>
+    <circle cx="910" cy="560" r="78"/>
+    <circle cx="1200" cy="570" r="100"/>
+    <circle cx="1450" cy="560" r="85"/>
+  </g>
+
+  <!-- water / fountain area -->
+  <rect x="0" y="640" width="1600" height="120" fill="url(#water)" opacity="0.75"/>
+  <g fill="#ffffff" opacity="0.65">
+    <!-- fountain sprays -->
+    <path d="M800 640 q -8 -40 0 -80 q 8 40 0 80 Z"/>
+    <path d="M840 640 q -6 -30 0 -60 q 6 30 0 60 Z"/>
+    <path d="M760 640 q -6 -30 0 -60 q 6 30 0 60 Z"/>
+  </g>
+
+  <!-- ripples -->
+  <g fill="none" stroke="#ffffff" stroke-opacity="0.45">
+    <ellipse cx="800" cy="690" rx="120" ry="16"/>
+    <ellipse cx="800" cy="700" rx="160" ry="20"/>
+    <ellipse cx="800" cy="710" rx="210" ry="26"/>
+  </g>
+
+  <!-- foreground grass -->
+  <g fill="#10b981" opacity="0.9">
+    <path d="M0 740 C 200 730, 400 760, 600 750 C 900 735, 1100 780, 1600 760 L 1600 900 L 0 900 Z"/>
+  </g>
+</svg>

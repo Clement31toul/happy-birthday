@@ -1,0 +1,36 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e3a8a"/>
+    </linearGradient>
+    <radialGradient id="star" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#fde68a"/>
+      <stop offset="60%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <linearGradient id="swirl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <!-- Stars -->
+  <g opacity="0.9">
+    <circle cx="200" cy="140" r="42" fill="url(#star)"/>
+    <circle cx="720" cy="120" r="34" fill="url(#star)"/>
+    <circle cx="1200" cy="180" r="38" fill="url(#star)"/>
+    <circle cx="480" cy="80" r="26" fill="url(#star)"/>
+    <circle cx="1020" cy="80" r="24" fill="url(#star)"/>
+  </g>
+  <!-- Swirls -->
+  <g fill="none" stroke="url(#swirl)" stroke-width="10" stroke-linecap="round" opacity="0.85">
+    <path d="M80 360 C 240 300, 420 420, 600 360 S 960 300, 1200 380 S 1440 460, 1560 400"/>
+    <path d="M-40 480 C 160 420, 360 520, 560 460 S 960 380, 1260 480 S 1520 560, 1680 520" stroke-width="8"/>
+    <path d="M0 600 C 200 540, 400 620, 620 560 S 1040 480, 1380 600 S 1600 700, 1800 660" stroke-width="6"/>
+  </g>
+  <!-- Horizon silhouette -->
+  <g fill="#0b1220" opacity="0.9">
+    <path d="M0 760 Q 200 720, 380 760 T 760 760 T 1140 760 T 1600 760 V 900 H 0 Z"/>
+  </g>
+</svg>

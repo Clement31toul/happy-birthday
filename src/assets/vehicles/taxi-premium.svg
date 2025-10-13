@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="160" viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="taxi-body" x1="0" y1="0" x2="1" y2="0.3">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="50%" stop-color="#fcd34d"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="taxi-shine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="wheel-grad">
+      <stop offset="0%" stop-color="#1f2937"/>
+      <stop offset="70%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    <filter id="shadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="2" dy="4" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <g filter="url(#shadow)">
+    <!-- Body -->
+    <path d="M30 100 L70 60 Q90 45 130 45 L200 45 Q230 45 250 70 L280 100 Z" 
+          fill="url(#taxi-body)" stroke="#d97706" stroke-width="3"/>
+    
+    <!-- Roof light (animated) -->
+    <g>
+      <rect x="140" y="32" width="30" height="16" rx="4" fill="#fde047" stroke="#d97706" stroke-width="2"/>
+      <rect x="145" y="36" width="20" height="8" rx="2" fill="#fef3c7" opacity="0.8">
+        <animate attributeName="opacity" values="0.8;1;0.8" dur="1s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+    
+    <!-- Windows -->
+    <rect x="95" y="52" width="50" height="28" rx="4" fill="#bae6fd" stroke="#0369a1" stroke-width="2" opacity="0.7"/>
+    <rect x="150" y="52" width="50" height="28" rx="4" fill="#bae6fd" stroke="#0369a1" stroke-width="2" opacity="0.7"/>
+    <rect x="205" y="52" width="35" height="28" rx="4" fill="#bae6fd" stroke="#0369a1" stroke-width="2" opacity="0.7"/>
+    
+    <!-- Window reflections -->
+    <rect x="95" y="52" width="50" height="12" rx="4" fill="url(#taxi-shine)"/>
+    <rect x="150" y="52" width="50" height="12" rx="4" fill="url(#taxi-shine)"/>
+    
+    <!-- Checker stripe -->
+    <rect x="50" y="82" width="210" height="10" fill="#111827" rx="2"/>
+    <g fill="#fbbf24">
+      <rect x="60" y="82" width="10" height="10"/>
+      <rect x="80" y="82" width="10" height="10"/>
+      <rect x="100" y="82" width="10" height="10"/>
+      <rect x="120" y="82" width="10" height="10"/>
+      <rect x="140" y="82" width="10" height="10"/>
+      <rect x="160" y="82" width="10" height="10"/>
+      <rect x="180" y="82" width="10" height="10"/>
+      <rect x="200" y="82" width="10" height="10"/>
+      <rect x="220" y="82" width="10" height="10"/>
+      <rect x="240" y="82" width="10" height="10"/>
+    </g>
+    
+    <!-- Headlights -->
+    <ellipse cx="265" cy="75" rx="8" ry="6" fill="#fef3c7" stroke="#fbbf24" stroke-width="2"/>
+    <ellipse cx="265" cy="75" rx="4" ry="3" fill="#ffffff" opacity="0.9"/>
+    
+    <!-- Wheels -->
+    <g>
+      <circle cx="85" cy="110" r="20" fill="url(#wheel-grad)" stroke="#374151" stroke-width="4"/>
+      <circle cx="85" cy="110" r="10" fill="#6b7280"/>
+      <circle cx="85" cy="110" r="4" fill="#9ca3af"/>
+      
+      <circle cx="235" cy="110" r="20" fill="url(#wheel-grad)" stroke="#374151" stroke-width="4"/>
+      <circle cx="235" cy="110" r="10" fill="#6b7280"/>
+      <circle cx="235" cy="110" r="4" fill="#9ca3af"/>
+    </g>
+    
+    <!-- Body shine -->
+    <path d="M80 60 Q120 50 160 50 L200 50 Q220 50 240 65" 
+          stroke="url(#taxi-shine)" stroke-width="6" fill="none" opacity="0.5"/>
+    
+    <!-- Door lines -->
+    <line x1="145" y1="55" x2="145" y2="95" stroke="#d97706" stroke-width="2" opacity="0.5"/>
+    <line x1="200" y1="55" x2="200" y2="95" stroke="#d97706" stroke-width="2" opacity="0.5"/>
+    
+    <!-- Ground shadow -->
+    <ellipse cx="160" cy="128" rx="110" ry="8" fill="#000000" opacity="0.2"/>
+  </g>
+</svg>
