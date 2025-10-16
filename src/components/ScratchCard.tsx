@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import calendarBg from "@/assets/calendar.svg";
+import happyBirthdayBg from "@/assets/Happy-birthday.png";
 
 interface ScratchCardProps {
   onComplete: () => void;
@@ -106,7 +107,10 @@ const ScratchCard = ({ onComplete }: ScratchCardProps) => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-2">
+    <div 
+      className="flex items-center justify-center min-h-screen p-2 bg-cover bg-center"
+      style={{ backgroundImage: `url(${happyBirthdayBg})` }}
+    >
       <Card ref={containerRef} className="relative w-full max-w-5xl aspect-[16/9] overflow-hidden shadow-strong">
         <div
           className="absolute inset-0 bg-cover bg-center"
