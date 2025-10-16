@@ -49,14 +49,18 @@ const CalendarRewind = ({ onComplete }: CalendarRewindProps) => {
   }, [onComplete, showFools]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-0 relative">
+    <div className="flex items-center justify-center min-h-screen p-0 relative overflow-hidden">
+      {/* Van Gogh background when reaching 20 Décembre */}
       {atFinalDate && (
         <div
-          className="absolute inset-0 -z-10 bg-cover bg-center opacity-95"
-          style={{ backgroundImage: `url(${painting})` }}
+          className="fixed inset-0 bg-cover bg-center transition-opacity duration-1000"
+          style={{ 
+            backgroundImage: `url(${painting})`,
+            zIndex: 0
+          }}
         />
       )}
-      <div className="relative w-full max-w-5xl">
+      <div className="relative w-full max-w-5xl z-10">
         <div className="relative h-[460px] flex items-center justify-center">
           <RedCalendar current={currentDate} flipping={flipping} />
           {/* Inline April Fools overlay */}
