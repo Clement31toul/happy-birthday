@@ -46,24 +46,30 @@ const TicketCheck = ({ onTicketsScanned }: TicketCheckProps) => {
         {/* Hidden tickets cleverly placed in the decor */}
         {/* Ticket 1: accolé à la fenêtre du chalet (gauche) */}
         <div
-          className={`absolute bottom-[33%] left-[16%] cursor-pointer transition-all ${
-            ticketsFound >= 1 ? "opacity-90 scale-110" : "opacity-30 hover:opacity-75"
+          className={`absolute bottom-[33%] left-[16%] cursor-pointer transition-all z-50 ${
+            ticketsFound >= 1 ? "opacity-100 scale-125" : "opacity-60 hover:opacity-90 hover:scale-110"
           }`}
           onClick={() => handleHiddenTicketClick(1)}
-          style={{ transform: "translate(-6px, -4px)" }}
+          style={{ 
+            transform: "translate(-6px, -4px)",
+            filter: ticketsFound >= 1 ? "drop-shadow(0 0 8px rgba(251, 191, 36, 0.8))" : "drop-shadow(0 2px 4px rgba(0,0,0,0.3))"
+          }}
         >
-          <Ticket className={`w-5 h-5 ${ticketsFound >= 1 ? "text-amber-600" : "text-amber-700/60"}`} />
+          <Ticket className={`w-6 h-6 ${ticketsFound >= 1 ? "text-amber-500" : "text-amber-600"}`} />
         </div>
 
         {/* Ticket 2: dans la grande roue (droite) */}
         <div
-          className={`absolute bottom-[35%] right-[9.5%] cursor-pointer transition-all ${
-            ticketsFound >= 2 ? "opacity-90 scale-110" : ticketsFound === 1 ? "opacity-30 hover:opacity-75" : "opacity-20"}
+          className={`absolute bottom-[35%] right-[9.5%] cursor-pointer transition-all z-50 ${
+            ticketsFound >= 2 ? "opacity-100 scale-125" : ticketsFound === 1 ? "opacity-60 hover:opacity-90 hover:scale-110" : "opacity-40 hover:opacity-70"}
           }`}
           onClick={() => handleHiddenTicketClick(2)}
-          style={{ transform: "translate(-12px, 10px)" }}
+          style={{ 
+            transform: "translate(-12px, 10px)",
+            filter: ticketsFound >= 2 ? "drop-shadow(0 0 8px rgba(16, 185, 129, 0.8))" : "drop-shadow(0 2px 4px rgba(0,0,0,0.3))"
+          }}
         >
-          <Ticket className={`w-5 h-5 ${ticketsFound >= 2 ? "text-emerald-700" : "text-emerald-800/60"}`} />
+          <Ticket className={`w-6 h-6 ${ticketsFound >= 2 ? "text-emerald-500" : "text-emerald-700"}`} />
         </div>
 
         {/* Invalid overlay */}
